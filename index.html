@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FaiSpesa</title>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"></script>
+
+</head>
+
+<body>
+    <!--modal registrazione-->
+    <div id="modal-full-sign-up" class="uk-modal-full" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+            <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                <div class="uk-background-cover" style="background-image: url('assets/img/BG_login.jpg');"
+                    uk-height-viewport>
+                </div>
+                <div class="uk-padding-large">
+                    <h1 class="center">FaiSpesa</h1>
+                    <h3 class="center">Crea un Account</h3>
+                    <div class="uk-margin">
+                        <label class="uk-form-label simpleText black" for="form-stacked-text">Nome e Cognome</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="nome_cognome_newUser" type="text"
+                                placeholder="inserisci nome e cognome">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <label class="uk-form-label simpleText black" for="form-stacked-text">Email</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="emailNewUser" type="email" placeholder="Inserisci email">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <label class="uk-form-label simpleText black" for="form-stacked-text">Password</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="passNewUser" type="password"
+                                placeholder="Inserisci password">
+                        </div>
+                    </div>
+                    <button id="createNewAccount" class="uk-button uk-button-primary button-modal">Crea Account</button>
+                    <p class="simpleText center black"> hai già un account?</p>
+                    <a class="modal-linkText center" href="#">
+                        <p class="center">Accedi ora</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!--modal login-->
+    <div id="modal-full-sign-in" class="uk-modal-full" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+            <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                <div class="uk-background-cover" style="background-image: url('assets/img/BG_login.jpg');"
+                    uk-height-viewport>
+                </div>
+                <div class="uk-padding-large">
+                    <h1 class="center">FaiSpesa</h1>
+                    <h3 class="center">Accedi</h3>
+                    <div class="uk-margin">
+                        <label class="uk-form-label simpleText black" for="form-stacked-text">Email</label>
+                        <div class="uk-form-controls">
+                            <label for="emailLogin"></label>
+                            <input class="uk-input" id="emailLogin" type="email" placeholder="Inserisci email">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <label class="uk-form-label simpleText black" for="form-stacked-text">Password</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="passwordLogin" type="password"
+                                placeholder="Inserisci password">
+                        </div>
+                    </div>
+                    <button id="login" class="uk-button uk-button-primary button-modal">Accedi</button>
+                    <button id="logout" class="uk-button uk-button-primary button-modal hide">Logout</button>
+                    <p class="simpleText center black"> oppure</p>
+                    <a class="modal-linkText center" href="#">
+                        <p class="center">Crea account</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <img src="./assets/img/logo.png" alt="logo">
+        <ul id="ul-nav">
+            <li><a href="#">Scarica</a></li>
+            <li><a href="#">Funzionalità</a></li>
+            <li><a href="#">Contatti</a></li>
+            <li><a href="#modal-full-sign-up" uk-toggle>Registrati</a></li>
+            <li><a class="uk-button uk-button-default login" href="#modal-full-sign-in" uk-toggle>Accedi</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1 class="title">il nuovo modo <br> di fare spesa!</h1>
+        <p class="subtitle">Lorem ipsum dolor sit amet consectetur <br>adipisicing elit. Dolor sapiente atque, <br>dicta
+            nobis, quos deserunt minus iure nostrum.</p>
+        <div class="banner">
+            <p class="banner-text">Scarica l'applicazione per il tuo smartphone</p>
+            <div class="banner-img">
+                <img class="margin-img" src="assets/img/playstore.png">
+                <img src="assets/img/appstore.png">
+            </div>
+            <p class="banner-text">Oppure <b>Accedi</b> o <b>Registrati</b> alla versione web!</p>
+            <!--  <img class="phone" src="assets/img/phone.png">-->
+        </div>
+    </div>
+    <div class="container2">
+        <img class="arrows" src="assets/img/arrow_white.png">
+        <h1 class="title black center">scopri le Funzionalità fai la spesa senza pensieri!</h1>
+        <p class="subtitle black center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, excepturi.
+            Sunt nobis dolorem nam voluptatibus! Facere dicta fugiat deserunt quisquam id</p>
+        <div class="grid">
+            <div class="box">
+                <h5 class="box-title">Crea e salva le tue liste</h5>
+                <img src="assets/img/home_liste.png">
+                <p class="box-subtitle">compri sempre gli stessi articoli oppure <br> aggiungi sempre nuovi prodotti?
+                </p>
+                <hr class="box-hr">
+            </div>
+            <div class="box">
+                <h5 class="box-title">Aggiungi gli ingredienti delle tue ricette</h5>
+                <img src="assets/img/home_ricette.png">
+                <p class="box-subtitle">cosa prepari per cena? <br> torta al cioccolato o piatto light?
+                </p>
+                <hr class="box-hr">
+            </div>
+            <div class="box">
+                <h5 class="box-title">Invia liste ai tuoi amici</h5>
+                <img src="assets/img/home_share.png">
+                <p class="box-subtitle">invia liste della spesa a chi vuoi <br> e ricevi liste dai tuoi contatti!
+                </p>
+            </div>
+            <div class="box">
+                <h5 class="box-title">Aggiungi e spunta gli articoli</h5>
+                <img src="assets/img/home_cart.png">
+                <p class="box-subtitle">controlla tutto prima di <br> andare in cassa!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container3">
+        <img class="arrows" src="assets/img/arrow_blue.png">
+        <h1 class="title center">scopri le Funzionalità fai la spesa senza pensieri!</h1>
+        <p class="subtitle center">il parere dei nostri utenti è molto importante per noi! <br> se desideri segnalarci
+            problemi o consigliarci qualcosa non esitarci a scriverci!</p>
+        <div class="input">
+            <input class="inputs" type="email" placeholder="Indirizzo email">
+            <br><br>
+            <textarea class="inputs" name="commento" id="tarea" cols="30" rows="10"
+                placeholder="Scrivici il tuo messaggio!"></textarea>
+            <br>
+            <input class="inputs button" type="button" value="INVIA MESSAGGIO">
+        </div>
+    </div>
+    <footer>
+        <img id="btnBackToTop" class="backToTop" src="assets/img/backtotop.png">
+        <div class="grid-4x1">
+            <div class="box">
+                <img src="assets/img/logo_footer.png">
+            </div>
+            <div class="box">
+                <ul class="footer-ul">
+                    <li><a class="footer-text" href="#">scarica app</a></li>
+                    <!--da fare il capitalizw-->
+                    <li><a class="footer-text" href="#">funzionalità</a></li>
+                    <li><a class="footer-text" href="#">contatti</a></li>
+                    <li><a class="footer-text" href="#">privacy</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <ul class="footer-ul">
+                    <li><a class="footer-text" href="#">registrati</a></li>
+                    <li><a class="footer-text" href="#">accedi</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <ul class="footer-ul">
+                    <li class="footer-social-text">seguici su</li>
+                    <li class="flex"><img class="margin-right" src="assets/img/twitter.png"><img src="assets/img/facebbok.png"></li>
+                </ul>
+            </div>
+
+        </div>
+        <p class="footer-endText">©2019 FaiSpesa.it FaiSpesa® il nuovo modo di fare spesa™</p>
+    </footer>
+
+    <script src="assets/js/listener.js"></script>
+  
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBhVZoGjh6a_502229C6kZvQ3Mh33A4e20",
+    authDomain: "faispesa-73fe3.firebaseapp.com",
+    databaseURL: "https://faispesa-73fe3.firebaseio.com",
+    projectId: "faispesa-73fe3",
+    storageBucket: "faispesa-73fe3.appspot.com",
+    messagingSenderId: "576860798276",
+    appId: "1:576860798276:web:4e81952577ae9a0c482b11"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script src="assets/js/app.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</body>
+</html>

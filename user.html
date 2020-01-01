@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FaiSpesa</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+</head>
+
+<body style="margin: 0; overflow: hidden!important">
+    <nav>
+        <img src="./assets/img/logo.png" alt="logo">
+        <ul id="ul-nav">
+            <ul id="ul-nav" class="uk-tab" uk-tab>
+                <li class="uk-active"><a href="#">Elenco liste</a></li>
+                <li><a href="#">ricette</a></li>
+                <li>
+                    <a id="profile"><img src="assets/img/img_profile.png" alt=""> <span class="uk-margin-small-left"
+                            uk-icon="icon: triangle-down"></span></a>
+                    <div uk-dropdown="mode: click">
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li class="uk-active"><a id="user-name">nessun nome impostato</a></li>
+                            <li><a id="user-email" href="#"></a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a id="update" href="#">aggiorna info account</a></li>
+                            <li><a id="logout" href="#">Logout</a></li>
+                            <li class="hide"><a id="login" href="#">Login</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </ul>
+    </nav>
+    <div class="little-banner">
+        <p id="is-the-list-empty">Nessuna lista presente</p>
+        <hr>
+    </div>
+ <div id="navigator">
+    
+
+ </div>
+ 
+    <div class="uk-panel uk-panel-scrollable not-resizable fullheight" id="listContainer">
+        <span id="spinner" class="uk-margin-small-right spinner" uk-spinner="ratio: 3"></span>
+        <div id="listParent" class="uk-child-width-1-5@m uk-grid-small uk-grid-match" uk-grid>
+               <!-- <div  class="uk-card uk-card-primary  uk-card-body uk-inline-clip uk-transition-toggle u" tabindex="0">
+                    <h3 class="uk-card-title">Default</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
+                        <div class="flexy-box">
+                            <p class="uk-h4 uk-margin-remove"><i class="fas fa-pen"></i></p>
+                            <p class="uk-h4 uk-margin-remove"><i class="fas fa-paper-plane"></i></p>
+                            <p class="uk-h4 uk-margin-remove"><i class="fas fa-trash"></i></p>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Default</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div><div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Default</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div><div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Default</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div><div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Default</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div><div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Default</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div><div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Default</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>-->
+           
+
+
+
+        </div>
+    </div>
+    <!--uk-position-center-->
+    <div class="" id="empty-banner" > 
+
+        <div id="bringToFront" >
+
+
+            <h3 class="hide">benvenuto!</h3>
+            <h4 class="hide">inizia a creare le tue liste!</h4>
+            <div class="uk-flex" class="hide">
+                <div class="hide"><img class="home-liste" src="assets/img/home_liste.png"></div>
+                <div class="hide"><img class="pointing-arrow" src="assets/img/arrow_big.png"></div>
+            </div>
+
+            <p class="overwrite-position hide">crea ora la tua lista della spesa!</p>
+            <a id="bottonePiu" class="to-right" href="#modal-form-add-list" uk-toggle><img id="addList" src="assets/img/add_button.png"
+                    alt="aggiungi lista"></a>
+
+            <div id="modal-form-add-list" uk-modal>
+                <div class="uk-modal-dialog">
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <div class="uk-modal-header">
+                        <h2 class="uk-modal-title">Aggiungi lista</h2> 
+                    </div>
+                    <div class="uk-modal-body">
+                        <div class="uk-margin">
+                            <input id="titolo-spesa" class="uk-input" type="text" placeholder="inserisci titolo spesa">
+                            <hr>
+                            <textarea id="note-spesa" class="uk-textarea uk-input" rows="5"
+                                placeholder="Note della spesa"></textarea>
+                            <hr>
+
+                            <ul class="flex-tag">
+                                <li>tag</li>
+                                <li><a id="show-tag-dropdown">+</a></li>
+                            </ul>
+
+                            <div class="scrollable" uk-dropdown="pos: right-center;mode: click" uk-overflow-auto>
+                                <ul class="uk-nav uk-dropdown-nav" id="list-tag-load-db">
+                                    <li class="uk-active"><a href="#">TAG</a></li>
+                                    <li id="addtags"><a id="addNewTag">Aggiungi tag</a></li>
+                                    <li class="uk-nav-header">Aggiungi Tag</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex-tags" id="flex-tags">
+
+
+
+                        </div>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Annulla</button>
+                        <button id="confirm-list-add" class="uk-button uk-button-primary"
+                            type="button">Conferma</button>
+                    </div>
+                </div>
+            </div>
+            <!--<a class="tag"> mercato starebbe nel div flex tags <i class="far fa-times-circle hasPointer"
+                                onclick="alert('sas')"></i></a>-->
+        </div>
+    </div>
+    <div class="uk-position-bottom-center">
+        <footer>
+            <div class="grid-4x1">
+                <div class="box">
+                    <img src="assets/img/logo_footer.png">
+                </div>
+                <div class="box">
+                    <ul class="footer-ul">
+                        <li><a class="footer-text" href="#">scarica app</a></li>
+                        <li><a class="footer-text" href="#">funzionalità</a></li>
+                        <li><a class="footer-text" href="#">contatti</a></li>
+                        <li><a class="footer-text" href="#">privacy</a></li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class="footer-ul">
+                        <li><a class="footer-text" href="#">registrati</a></li>
+                        <li><a class="footer-text" href="#">accedi</a></li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class="footer-ul">
+                        <li class="footer-social-text">seguici su</li>
+                        <li class="flex"><img class="margin-right" src="assets/img/twitter.png"><img
+                                src="assets/img/facebbok.png"></li>
+                    </ul>
+                </div>
+
+            </div>
+            <p class="footer-endText">©2019 FaiSpesa.it FaiSpesa® il nuovo modo di fare spesa™</p>
+        </footer>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBhVZoGjh6a_502229C6kZvQ3Mh33A4e20",
+            authDomain: "faispesa-73fe3.firebaseapp.com",
+            databaseURL: "https://faispesa-73fe3.firebaseio.com",
+            projectId: "faispesa-73fe3",
+            storageBucket: "faispesa-73fe3.appspot.com",
+            messagingSenderId: "576860798276",
+            appId: "1:576860798276:web:4e81952577ae9a0c482b11"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="assets/js/app.js"></script>
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</body>
+
+</html>
