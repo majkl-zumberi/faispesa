@@ -1442,7 +1442,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         document.getElementById("bottonePiu").style.right = "0";
                         document.getElementById("bottonePiu").style.zIndex = "1";
                     } else {
-                        var littleBanner = document.getElementById("is-the-list-empty").innerHTML = "Nessuna lista presente";
+                     //   var littleBanner = document.getElementById("is-the-list-empty").innerHTML = "Nessuna lista presente";
                         document.getElementById("listContainer").setAttribute("class", "hide");
                         document.querySelector("#bringToFront").children[0].removeAttribute("class");
                         document.querySelector("#bringToFront").children[1].removeAttribute("class");
