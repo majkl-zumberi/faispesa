@@ -1,7 +1,7 @@
 var db = firebase.firestore();
 var location2 = window.location.pathname.split('/');
 //var counter2 = location2.length - 1;
-if (location2[2] == 'index.html') {
+if (location2[2] == 'index.html' || location[2] == '') {
     var btnSignUp = document.getElementById("createNewAccount");
     btnSignUp.addEventListener("click", () => {
         console.log("pronto per creare account!");
@@ -1406,7 +1406,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
            // var counter = location.length - 1;
             console.log(location);
           //  console.log(location[counter]);
-            if (location[2] == 'index.html') {
+            if (location[2] == 'index.html' || location[2] == '') {
                 console.log("sto reindirizzando in user.html");
                 window.location.href = "https://majkl-zumberi.github.io/faispesa/user.html";
             } else if (location[2] == 'user.html') {
