@@ -1410,7 +1410,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             } else if (location[counter] == 'user.html') {
                 var userEmail = document.getElementById('user-email').innerHTML = profile.email;
                 var username = document.getElementById("user-name").innerHTML = profile.displayName;
-            }
+            
             //number per scegliere il colore liste in base se questo numero è pari o dispari
             var number = 1;
             //creazione list .orderBy("titolo", "asc")
@@ -1458,7 +1458,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
                 })
 
-
+            }
 
         });
     } else {
