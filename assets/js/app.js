@@ -54,175 +54,8 @@ if (location2[counter2] == 'index.html') {
         }
 
     });
-}
-
-var btnLogin = document.getElementById("login");
-
-
-
-
-
-//login
-btnLogin.addEventListener("click", function () {
-
-    var inputEmail = document.getElementById("emailLogin");
-    var inputPsw = document.getElementById("passwordLogin");
-    const emailTxt = inputEmail.value;
-    const pswTxt = inputPsw.value;
-    console.log("email: " + emailTxt + " pass: " + pswTxt);
-    $("#emailLogin").removeClass("uk-form-success"),
-        $("#emailLogin").removeClass("uk-form-danger"),
-        $("#passwordLogin").removeClass("uk-form-success"),
-        $("#passwordLogin").removeClass("uk-form-danger");
-    //registrazione
-    if (emailTxt == '' && pswTxt == '') {
-
-        $('#emailLogin').attr("placeholder", ' inserisci l\'email.');
-        $("#emailLogin").removeClass("uk-form-success"),
-            $("#emailLogin").addClass("uk-form-danger");
-        $('#passwordLogin').attr("placeholder", ' inserisci la password.');
-        $("#passwordLogin").removeClass("uk-form-success"),
-            $("#passwordLogin").addClass("uk-form-danger");
-    } else if (emailTxt == '') {
-        $('#emailLogin').attr("placeholder", ' inserisci l\'email.');
-        $("#emailLogin").removeClass("uk-form-success"),
-            $("#emailLogin").addClass("uk-form-danger");
-    } else if (pswTxt == '') {
-        $('#passwordLogin').attr("placeholder", ' inserisci la password.');
-        $("#passwordLogin").removeClass("uk-form-success"),
-            $("#passwordLogin").addClass("uk-form-danger");
-
-    } else {
-        firebase.auth().signInWithEmailAndPassword(emailTxt, pswTxt).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorMessage == 'The email address is badly formatted.') {
-                UIkit.notification("L\'indirizzo email è formattato in modo errato.", {
-                    pos: 'bottom-right'
-                }, {
-                    status: 'danger'
-                });
-                $("#emailLogin").focus(),
-                    $("#emailLogin").attr("placeholder", ' L\'indirizzo email è formattato in modo errato.'),
-                    $("#emailLogin").removeClass("uk-form-success"),
-                    $("#emailLogin").addClass("uk-form-danger");
-            } else if (errorMessage == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
-                UIkit.notification("impossibile trovare il tuo account faiSpesa😯", {
-                    pos: 'bottom-right'
-                }, {
-                    status: 'danger'
-                });
-                $("#emailLogin").removeClass("uk-form-success"),
-                    $("#emailLogin").addClass("uk-form-danger");
-            } else if (errorMessage == 'The password is invalid or the user does not have a password.') {
-                $("#passwordLogin").focus(),
-                    UIkit.notification("password non valida", {
-                        pos: 'bottom-right'
-                    }, {
-                        status: 'danger'
-                    });
-                $("#passwordLogin").removeClass("uk-form-success"),
-                    $("#passwordLogin").addClass("uk-form-danger");
-                $("#passwordLogin").val("");
-            }
-        });
-    }
-
-
-
-});
-
-var btnLogOut = document.getElementById("logout");
-btnLogOut.addEventListener('click', e => {
-    firebase.auth().signOut();
-    console.log('logged out');
-    window.location.href = ('index.html');
-});
-var email = "";
-var name = "";
-//realtime auth listener
-firebase.auth().onAuthStateChanged(firebaseUser => {
-    if (firebaseUser) {
-        // console.log(firebaseUser);
-        btnLogOut.classList.remove('hide');
-        firebaseUser.providerData.forEach(function (profile) {
-            console.log("Sign-in provider: " + profile.providerId);
-            console.log("  Provider-specific UID: " + profile.uid);
-            console.log("  Name: " + profile.displayName);
-            name = profile.displayName;
-            console.log("  Email: " + profile.email);
-            email = profile.email;
-            console.log("  Email: " + profile.emailVerified);
-            console.log("  Password: " + profile.password);
-            // window.location.href = ('user.html');
-
-            var location = window.location.pathname.split('/');
-            var counter = location.length - 1;
-            console.log(location[counter]);
-            if (location[counter] == 'index.html') {
-                window.location.href = ('user.html');
-            } else if (location[counter] == 'user.html') {
-                var userEmail = document.getElementById('user-email').innerHTML = profile.email;
-                var username = document.getElementById("user-name").innerHTML = profile.displayName;
-            }
-            //number per scegliere il colore liste in base se questo numero è pari o dispari
-            var number = 1;
-            //creazione list .orderBy("titolo", "asc")
-            db.collection("elenco-liste").orderBy("titolo", "asc").where("user", "==", email)
-                .onSnapshot(function (querySnapshot) {
-                    if (querySnapshot.size != 0) {
-                        document.getElementById("listContainer").removeAttribute("class");
-                        document.getElementById("listContainer").setAttribute("class", "uk-panel uk-panel-scrollable not-resizable fullheight");
-                        document.querySelector("#bringToFront").children[0].setAttribute("class", "hide");
-                        document.querySelector("#bringToFront").children[1].setAttribute("class", "hide");
-                        document.querySelector("#bringToFront").children[3].setAttribute("class", "hide");
-                        //   document.querySelector("#bringToFront").children[3].setAttribute("class","overwrite-position");
-                        document.querySelector("#bringToFront").children[2].children[0].setAttribute("class", "hide");
-                        document.querySelector("#bringToFront").children[2].children[1].setAttribute("class", "hide");
-                        var littleBanner = document.getElementById("is-the-list-empty").innerHTML = "  Elenco liste della spesa(" + querySnapshot.size + ")";
-                        const container = document.getElementById("listParent");
-                        while (container.hasChildNodes()) {
-                            container.removeChild(container.lastChild);
-                        }
-                        querySnapshot.forEach(function (doc) {
-                            // doc.data() is never undefined for query doc snapshots
-                            document.getElementById("spinner").setAttribute("class", "hide");
-                            console.log(doc.id, " => ", doc.data());
-                            createList(doc.data().titolo, doc.data().descrizione, doc.data().tags, number);
-                            number++;
-                        });
-                        document.getElementById("bottonePiu").style.position = "absolute";
-                        document.getElementById("bottonePiu").style.bottom = "16vh";
-                        document.getElementById("bottonePiu").style.right = "0";
-                        document.getElementById("bottonePiu").style.zIndex = "1";
-                    } else {
-                        var littleBanner = document.getElementById("is-the-list-empty").innerHTML = "Nessuna lista presente";
-                        document.getElementById("listContainer").setAttribute("class", "hide");
-                        document.querySelector("#bringToFront").children[0].removeAttribute("class");
-                        document.querySelector("#bringToFront").children[1].removeAttribute("class");
-                        document.querySelector("#bringToFront").children[3].removeAttribute("class");
-                        document.querySelector("#bringToFront").children[3].setAttribute("class", "overwrite-position");
-                        document.querySelector("#bringToFront").children[2].children[0].removeAttribute("class");
-                        document.querySelector("#bringToFront").children[2].children[1].removeAttribute("class");
-                        document.getElementById("bottonePiu").style.position = "";
-                        document.getElementById("bottonePiu").style.bottom = "";
-                        document.getElementById("bottonePiu").style.right = "";
-                        document.getElementById("bottonePiu").style.zIndex = "";
-                    }
-
-                })
-
-
-
-        });
-    } else {
-        console.log('not logged in');
-        btnLogOut.classList.add('hide');
-
-    }
-});
-var btnAddNewList = document.getElementById("addNewTag");
+}else if(location2[counter2] == 'user.html'){
+    var btnAddNewList = document.getElementById("addNewTag");
 btnAddNewList.addEventListener("click", function () {
     console.log("pronto per aggiungere una nuova lista:");
     var list = UIkit.modal.prompt('Nome tag:', 'inserisci il un nuovo tag').then(function (response) {
@@ -1466,3 +1299,171 @@ function initForNavigateEvent(titolo, note) {
     //    document.getElementById("navigator").innerHTML='<a href="#" class="float"> <i class="fa fa-plus my-float"></i> </a>';
 
 }
+}
+
+var btnLogin = document.getElementById("login");
+
+
+
+
+
+//login
+btnLogin.addEventListener("click", function () {
+
+    var inputEmail = document.getElementById("emailLogin");
+    var inputPsw = document.getElementById("passwordLogin");
+    const emailTxt = inputEmail.value;
+    const pswTxt = inputPsw.value;
+    console.log("email: " + emailTxt + " pass: " + pswTxt);
+    $("#emailLogin").removeClass("uk-form-success"),
+        $("#emailLogin").removeClass("uk-form-danger"),
+        $("#passwordLogin").removeClass("uk-form-success"),
+        $("#passwordLogin").removeClass("uk-form-danger");
+    //registrazione
+    if (emailTxt == '' && pswTxt == '') {
+
+        $('#emailLogin').attr("placeholder", ' inserisci l\'email.');
+        $("#emailLogin").removeClass("uk-form-success"),
+            $("#emailLogin").addClass("uk-form-danger");
+        $('#passwordLogin').attr("placeholder", ' inserisci la password.');
+        $("#passwordLogin").removeClass("uk-form-success"),
+            $("#passwordLogin").addClass("uk-form-danger");
+    } else if (emailTxt == '') {
+        $('#emailLogin').attr("placeholder", ' inserisci l\'email.');
+        $("#emailLogin").removeClass("uk-form-success"),
+            $("#emailLogin").addClass("uk-form-danger");
+    } else if (pswTxt == '') {
+        $('#passwordLogin').attr("placeholder", ' inserisci la password.');
+        $("#passwordLogin").removeClass("uk-form-success"),
+            $("#passwordLogin").addClass("uk-form-danger");
+
+    } else {
+        firebase.auth().signInWithEmailAndPassword(emailTxt, pswTxt).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorMessage == 'The email address is badly formatted.') {
+                UIkit.notification("L\'indirizzo email è formattato in modo errato.", {
+                    pos: 'bottom-right'
+                }, {
+                    status: 'danger'
+                });
+                $("#emailLogin").focus(),
+                    $("#emailLogin").attr("placeholder", ' L\'indirizzo email è formattato in modo errato.'),
+                    $("#emailLogin").removeClass("uk-form-success"),
+                    $("#emailLogin").addClass("uk-form-danger");
+            } else if (errorMessage == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+                UIkit.notification("impossibile trovare il tuo account faiSpesa😯", {
+                    pos: 'bottom-right'
+                }, {
+                    status: 'danger'
+                });
+                $("#emailLogin").removeClass("uk-form-success"),
+                    $("#emailLogin").addClass("uk-form-danger");
+            } else if (errorMessage == 'The password is invalid or the user does not have a password.') {
+                $("#passwordLogin").focus(),
+                    UIkit.notification("password non valida", {
+                        pos: 'bottom-right'
+                    }, {
+                        status: 'danger'
+                    });
+                $("#passwordLogin").removeClass("uk-form-success"),
+                    $("#passwordLogin").addClass("uk-form-danger");
+                $("#passwordLogin").val("");
+            }
+        });
+    }
+
+
+
+});
+
+var btnLogOut = document.getElementById("logout");
+btnLogOut.addEventListener('click', e => {
+    firebase.auth().signOut();
+    console.log('logged out');
+    window.location.href = ('index.html');
+});
+var email = "";
+var name = "";
+//realtime auth listener
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+        // console.log(firebaseUser);
+        btnLogOut.classList.remove('hide');
+        firebaseUser.providerData.forEach(function (profile) {
+            console.log("Sign-in provider: " + profile.providerId);
+            console.log("  Provider-specific UID: " + profile.uid);
+            console.log("  Name: " + profile.displayName);
+            name = profile.displayName;
+            console.log("  Email: " + profile.email);
+            email = profile.email;
+            console.log("  Email: " + profile.emailVerified);
+            console.log("  Password: " + profile.password);
+            // window.location.href = ('user.html');
+
+            var location = window.location.pathname.split('/');
+            var counter = location.length - 1;
+            console.log(location[counter]);
+            if (location[counter] == 'index.html') {
+                window.location.href = ('user.html');
+            } else if (location[counter] == 'user.html') {
+                var userEmail = document.getElementById('user-email').innerHTML = profile.email;
+                var username = document.getElementById("user-name").innerHTML = profile.displayName;
+            }
+            //number per scegliere il colore liste in base se questo numero è pari o dispari
+            var number = 1;
+            //creazione list .orderBy("titolo", "asc")
+            db.collection("elenco-liste").orderBy("titolo", "asc").where("user", "==", email)
+                .onSnapshot(function (querySnapshot) {
+                    if (querySnapshot.size != 0) {
+                        document.getElementById("listContainer").removeAttribute("class");
+                        document.getElementById("listContainer").setAttribute("class", "uk-panel uk-panel-scrollable not-resizable fullheight");
+                        document.querySelector("#bringToFront").children[0].setAttribute("class", "hide");
+                        document.querySelector("#bringToFront").children[1].setAttribute("class", "hide");
+                        document.querySelector("#bringToFront").children[3].setAttribute("class", "hide");
+                        //   document.querySelector("#bringToFront").children[3].setAttribute("class","overwrite-position");
+                        document.querySelector("#bringToFront").children[2].children[0].setAttribute("class", "hide");
+                        document.querySelector("#bringToFront").children[2].children[1].setAttribute("class", "hide");
+                        var littleBanner = document.getElementById("is-the-list-empty").innerHTML = "  Elenco liste della spesa(" + querySnapshot.size + ")";
+                        const container = document.getElementById("listParent");
+                        while (container.hasChildNodes()) {
+                            container.removeChild(container.lastChild);
+                        }
+                        querySnapshot.forEach(function (doc) {
+                            // doc.data() is never undefined for query doc snapshots
+                            document.getElementById("spinner").setAttribute("class", "hide");
+                            console.log(doc.id, " => ", doc.data());
+                            createList(doc.data().titolo, doc.data().descrizione, doc.data().tags, number);
+                            number++;
+                        });
+                        document.getElementById("bottonePiu").style.position = "absolute";
+                        document.getElementById("bottonePiu").style.bottom = "16vh";
+                        document.getElementById("bottonePiu").style.right = "0";
+                        document.getElementById("bottonePiu").style.zIndex = "1";
+                    } else {
+                        var littleBanner = document.getElementById("is-the-list-empty").innerHTML = "Nessuna lista presente";
+                        document.getElementById("listContainer").setAttribute("class", "hide");
+                        document.querySelector("#bringToFront").children[0].removeAttribute("class");
+                        document.querySelector("#bringToFront").children[1].removeAttribute("class");
+                        document.querySelector("#bringToFront").children[3].removeAttribute("class");
+                        document.querySelector("#bringToFront").children[3].setAttribute("class", "overwrite-position");
+                        document.querySelector("#bringToFront").children[2].children[0].removeAttribute("class");
+                        document.querySelector("#bringToFront").children[2].children[1].removeAttribute("class");
+                        document.getElementById("bottonePiu").style.position = "";
+                        document.getElementById("bottonePiu").style.bottom = "";
+                        document.getElementById("bottonePiu").style.right = "";
+                        document.getElementById("bottonePiu").style.zIndex = "";
+                    }
+
+                })
+
+
+
+        });
+    } else {
+        console.log('not logged in');
+        btnLogOut.classList.add('hide');
+
+    }
+});
