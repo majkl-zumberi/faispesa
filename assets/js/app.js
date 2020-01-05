@@ -1404,8 +1404,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
             var location = window.location.pathname.split('/');
             var counter = location.length - 1;
+            console.log(location);
             console.log(location[counter]);
             if (location[counter] == 'index.html') {
+                console.log("sto reindirizzando in user.html");
                 window.location.href = ('user.html');
             } else if (location[counter] == 'user.html') {
                 var userEmail = document.getElementById('user-email').innerHTML = profile.email;
