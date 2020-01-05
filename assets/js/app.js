@@ -1,7 +1,7 @@
 var db = firebase.firestore();
 var location2 = window.location.pathname.split('/');
-var counter2 = location2.length - 1;
-if (location2[counter2] == 'index.html') {
+//var counter2 = location2.length - 1;
+if (location2[2] == '') {
     var btnSignUp = document.getElementById("createNewAccount");
     btnSignUp.addEventListener("click", () => {
         console.log("pronto per creare account!");
@@ -54,7 +54,7 @@ if (location2[counter2] == 'index.html') {
         }
 
     });
-}else if(location2[counter2] == 'user.html'){
+}else if(location2[2] == 'user.html'){
     var btnAddNewList = document.getElementById("addNewTag");
 btnAddNewList.addEventListener("click", function () {
     console.log("pronto per aggiungere una nuova lista:");
@@ -1403,13 +1403,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             // window.location.href = ('user.html');
 
             var location = window.location.pathname.split('/');
-            var counter = location.length - 1;
+           // var counter = location.length - 1;
             console.log(location);
-            console.log(location[counter]);
-            if (location[counter] == 'index.html') {
+          //  console.log(location[counter]);
+            if (location[2] == '') {
                 console.log("sto reindirizzando in user.html");
-                window.location.href = ('user.html');
-            } else if (location[counter] == 'user.html') {
+                window.location.href = "https://majkl-zumberi.github.io/faispesa/user.html";
+            } else if (location[2] == 'user.html') {
                 var userEmail = document.getElementById('user-email').innerHTML = profile.email;
                 var username = document.getElementById("user-name").innerHTML = profile.displayName;
             
